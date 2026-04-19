@@ -33,7 +33,7 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={page === '/' ? 'app-shell app-shell-home' : 'app-shell app-shell-inner'}>
       <Navbar currentPath={page} />
       {renderPage()}
     </div>

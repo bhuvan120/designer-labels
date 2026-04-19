@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
 
 const links = [
@@ -50,9 +50,24 @@ function MenuIcon({ open }) {
 export default function Navbar({ currentPath }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const [searchQuery, setSearchQuery] = useState(
     new URLSearchParams(window.location.search).get('q') || '',
   )
+
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24)
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [currentPath])
 
   const handleSearchSubmit = (event) => {
     event.preventDefault()
@@ -61,77 +76,107 @@ export default function Navbar({ currentPath }) {
   }
 
   return (
-    <header className="site-header">
-      <button
-        type="button"
-        className="menu-toggle"
-        onClick={() => setMenuOpen((current) => !current)}
-        aria-expanded={menuOpen}
-        aria-controls="site-menu"
-        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+    <>
+      <div
+        className={
+          currentPath === '/' && !scrolled
+            ? 'site-header-shell site-header-shell-transparent'
+            : 'site-header-shell'
+        }
       >
-        <MenuIcon open={menuOpen} />
-      </button>
-
-      <a href="/" className="brand-lockup" aria-label="Label Niharika home">
-        <span className="brand-lockup-top">LABEL</span>
-        <span className="brand-lockup-bottom">NIHARIKA</span>
-      </a>
-
-      <div className="site-header-right">
-        <form
-          className={searchOpen || searchQuery ? 'header-search header-search-open' : 'header-search'}
-          onSubmit={handleSearchSubmit}
-          role="search"
-        >
+        <header className="site-header">
           <button
             type="button"
-            className="search-toggle"
-            onClick={() => setSearchOpen((current) => !current)}
-            aria-label={searchOpen ? 'Close search' : 'Open search'}
+            className="menu-toggle"
+            onClick={() => setMenuOpen((current) => !current)}
+            aria-expanded={menuOpen}
+            aria-controls="site-menu"
+            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
-            <SearchIcon />
+            <MenuIcon open={menuOpen} />
           </button>
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(event) => setSearchQuery(event.target.value)}
-            placeholder="Search products"
-            aria-label="Search products"
-            onBlur={() => {
-              if (!searchQuery) {
-                setSearchOpen(false)
-              }
-            }}
-          />
-        </form>
-        <a
-          href={getWhatsAppUrl(getCustomOrderMessage())}
-          className="instagram-link nav-whatsapp"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Order on WhatsApp"
-        >
-          <WhatsAppIcon />
-        </a>
+
+          <a href="/" className="brand-lockup" aria-label="Label Niharika home">
+            <span className="brand-lockup-top">LABEL</span>
+            <span className="brand-lockup-bottom">NIHARIKA</span>
+          </a>
+
+          <div className="site-header-right">
+            <form
+              className={searchOpen || searchQuery ? 'header-search header-search-open' : 'header-search'}
+              onSubmit={handleSearchSubmit}
+              role="search"
+            >
+              <button
+                type="button"
+                className="search-toggle"
+                onClick={() => setSearchOpen((current) => !current)}
+                aria-label={searchOpen ? 'Close search' : 'Open search'}
+              >
+                <SearchIcon />
+              </button>
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Search products"
+                aria-label="Search products"
+                onBlur={() => {
+                  if (!searchQuery) {
+                    setSearchOpen(false)
+                  }
+                }}
+              />
+            </form>
+            <a
+              href={getWhatsAppUrl(getCustomOrderMessage())}
+              className="instagram-link nav-whatsapp"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Order on WhatsApp"
+            >
+              <WhatsAppIcon />
+            </a>
+          </div>
+        </header>
       </div>
+
+      <div
+        className={menuOpen ? 'site-sidebar-backdrop site-sidebar-backdrop-open' : 'site-sidebar-backdrop'}
+        onClick={() => setMenuOpen(false)}
+        aria-hidden="true"
+      />
 
       <nav
         id="site-menu"
-        className={menuOpen ? 'site-nav site-nav-open' : 'site-nav'}
+        className={menuOpen ? 'site-sidebar site-sidebar-open' : 'site-sidebar'}
         aria-label="Primary navigation"
       >
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={currentPath === link.href ? 'nav-link-active' : ''}
+        <div className="site-sidebar-header">
+          <p className="eyebrow">Menu</p>
+          <button
+            type="button"
+            className="site-sidebar-close"
             onClick={() => setMenuOpen(false)}
+            aria-label="Close sidebar"
           >
-            {link.label}
-          </a>
-        ))}
+            <MenuIcon open={true} />
+          </button>
+        </div>
+
+        <div className="site-sidebar-links">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={currentPath === link.href ? 'nav-link-active' : ''}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </nav>
-    </header>
+    </>
   )
 }
