@@ -10,24 +10,34 @@ export default function Showcase({
   showAllProducts,
   totalCount,
   onShowAllProducts,
+  eyebrow,
+  title,
+  description,
+  hideCategoryFilter = false,
+  sectionClassName = '',
 }) {
   return (
-    <section id="explore" className="section showcase-section">
+    <section id="explore" className={`section showcase-section ${sectionClassName}`.trim()}>
       <div className="section-header split-header">
         <div>
-          <p className="eyebrow">{showAllProducts ? 'Full collection' : 'New arrivals'}</p>
-          <h2>{showAllProducts ? 'All Niharika label pieces.' : "Featured pieces from Niharika's label."}</h2>
+          <p className="eyebrow">
+            {eyebrow ?? (showAllProducts ? 'Full collection' : 'New arrivals')}
+          </p>
+          <h2>{title ?? (showAllProducts ? 'All Niharika label pieces.' : "Featured pieces from Niharika's label.")}</h2>
           <p>
-            {showAllProducts
-              ? 'Browse every available product, concept, and design reference.'
-              : 'A small edit of selected products. Open all products for the complete collection.'}
+            {description ??
+              (showAllProducts
+                ? 'Browse every available product, concept, and design reference.'
+                : 'A small edit of selected products. Open all products for the complete collection.')}
           </p>
         </div>
-        <CategoryFilter
-          categories={categories}
-          activeCategory={activeCategory}
-          onSelectCategory={onSelectCategory}
-        />
+        {!hideCategoryFilter && (
+          <CategoryFilter
+            categories={categories}
+            activeCategory={activeCategory}
+            onSelectCategory={onSelectCategory}
+          />
+        )}
       </div>
 
       <div className="design-grid">

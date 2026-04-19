@@ -2,17 +2,19 @@ import { useState } from 'react'
 import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
 
 const links = [
-  { href: '#explore', label: 'Products' },
-  { href: '#about', label: 'About' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/products', label: 'Products' },
+  { href: '/products?category=Womenswear', label: 'Womenswear' },
+  { href: '/products?category=Menswear', label: 'Menswear' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ]
 
-function InstagramIcon() {
+function SearchIcon() {
   return (
     <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" />
+      <circle cx="11" cy="11" r="7" />
+      <path d="m17 17 4 4" />
     </svg>
   )
 }
@@ -45,81 +47,91 @@ function MenuIcon({ open }) {
   )
 }
 
-export default function Navbar({ showAllProducts, onToggleProducts }) {
+export default function Navbar({ currentPath }) {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState(
+    new URLSearchParams(window.location.search).get('q') || '',
+  )
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault()
+    const query = searchQuery.trim()
+    window.location.href = query ? `/products?q=${encodeURIComponent(query)}` : '/products'
+  }
 
   return (
     <header className="site-header">
-      <a href="#home" className="brand-mark">
-        <span className="brand-logo">
-          <img src="brand/logo.jpeg" alt="" />
-        </span>
-        <span  className="brand-name">Niharika Labels</span>
+      <button
+        type="button"
+        className="menu-toggle"
+        onClick={() => setMenuOpen((current) => !current)}
+        aria-expanded={menuOpen}
+        aria-controls="site-menu"
+        aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+      >
+        <MenuIcon open={menuOpen} />
+      </button>
+
+      <a href="/" className="brand-lockup" aria-label="Label Niharika home">
+        <span className="brand-lockup-top">LABEL</span>
+        <span className="brand-lockup-bottom">NIHARIKA</span>
       </a>
+
+      <div className="site-header-right">
+        <form
+          className={searchOpen || searchQuery ? 'header-search header-search-open' : 'header-search'}
+          onSubmit={handleSearchSubmit}
+          role="search"
+        >
+          <button
+            type="button"
+            className="search-toggle"
+            onClick={() => setSearchOpen((current) => !current)}
+            aria-label={searchOpen ? 'Close search' : 'Open search'}
+          >
+            <SearchIcon />
+          </button>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="Search products"
+            aria-label="Search products"
+            onBlur={() => {
+              if (!searchQuery) {
+                setSearchOpen(false)
+              }
+            }}
+          />
+        </form>
+        <a
+          href={getWhatsAppUrl(getCustomOrderMessage())}
+          className="instagram-link nav-whatsapp"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Order on WhatsApp"
+        >
+          <WhatsAppIcon />
+        </a>
+      </div>
 
       <nav
         id="site-menu"
         className={menuOpen ? 'site-nav site-nav-open' : 'site-nav'}
         aria-label="Primary navigation"
       >
-        <button
-          type="button"
-          className="nav-menu-product"
-          onClick={() => {
-            onToggleProducts(!showAllProducts)
-            setMenuOpen(false)
-          }}
-        >
-          {showAllProducts ? 'Home' : 'All Products'}
-        </button>
         {links.map((link) => (
           <a
             key={link.href}
             href={link.href}
-            onClick={() => {
-              if (link.href === '#explore') {
-                onToggleProducts(true)
-              }
-              setMenuOpen(false)
-            }}
+            className={currentPath === link.href ? 'nav-link-active' : ''}
+            onClick={() => setMenuOpen(false)}
           >
             {link.label}
           </a>
         ))}
       </nav>
-
-      <div className="nav-socials">
-        <button
-          type="button"
-          className="menu-toggle"
-          onClick={() => setMenuOpen((current) => !current)}
-          aria-expanded={menuOpen}
-          aria-controls="site-menu"
-          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-        >
-          <MenuIcon open={menuOpen} />
-        </button>
-        <a
-          href={getWhatsAppUrl(getCustomOrderMessage())}
-          className="instagram-link nav-instagram"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Order on WhatsApp"
-        >
-          <WhatsAppIcon />
-          <span>WhatsApp</span>
-        </a>
-        <a
-          href="https://www.instagram.com/label_by_niharikabadri/"
-          className="instagram-link nav-instagram"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Niharika on Instagram"
-        >
-          <InstagramIcon />
-          <span>Instagram</span>
-        </a>
-      </div>
     </header>
   )
 }

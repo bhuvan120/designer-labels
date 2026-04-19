@@ -13,15 +13,10 @@ export default function DesignCard({ design, onSelect }) {
         <button type="button" className="card-title" onClick={() => onSelect(design)}>
           {design.title}
         </button>
-        <p className="product-price">{design.price}</p>
-        <div className="card-actions">
-          <a className="button button-primary button-small" href={orderUrl} target="_blank" rel="noreferrer">
-            Order on WhatsApp
-          </a>
-          <button type="button" className="button button-secondary button-small" onClick={() => onSelect(design)}>
-            View Details
-          </button>
-        </div>
+        <p className="card-price">{design.price}</p>
+        <button type="button" className="product-image-link" onClick={() => onSelect(design)}>
+          View Details
+        </button>
       </div>
     </article>
   )
