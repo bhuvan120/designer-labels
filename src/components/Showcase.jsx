@@ -1,16 +1,26 @@
 import CategoryFilter from './CategoryFilter.jsx'
 import DesignCard from './DesignCard.jsx'
 
-export default function Showcase({ designs, activeCategory, categories, onSelectCategory, onSelectDesign }) {
+export default function Showcase({
+  designs,
+  activeCategory,
+  categories,
+  onSelectCategory,
+  onSelectDesign,
+  showAllProducts,
+  totalCount,
+  onShowAllProducts,
+}) {
   return (
     <section id="explore" className="section showcase-section">
       <div className="section-header split-header">
         <div>
-          <p className="eyebrow">New arrivals</p>
-          <h2>Shop Niharika's label pieces.</h2>
+          <p className="eyebrow">{showAllProducts ? 'Full collection' : 'New arrivals'}</p>
+          <h2>{showAllProducts ? 'All Niharika label pieces.' : "Featured pieces from Niharika's label."}</h2>
           <p>
-            Browse each product, open details, or place an order on WhatsApp with the design name
-            already included.
+            {showAllProducts
+              ? 'Browse every available product, concept, and design reference.'
+              : 'A small edit of selected products. Open all products for the complete collection.'}
           </p>
         </div>
         <CategoryFilter
@@ -25,6 +35,14 @@ export default function Showcase({ designs, activeCategory, categories, onSelect
           <DesignCard key={design.id} design={design} onSelect={onSelectDesign} />
         ))}
       </div>
+
+      {!showAllProducts && totalCount > designs.length && (
+        <div className="showcase-footer">
+          <button type="button" className="button button-secondary" onClick={onShowAllProducts}>
+            View All Products
+          </button>
+        </div>
+      )}
     </section>
   )
 }

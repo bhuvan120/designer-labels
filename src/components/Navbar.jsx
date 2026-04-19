@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
 
 const links = [
-  { href: '#explore', label: 'Shop' },
-  { href: '#join', label: 'Order' },
+  { href: '#explore', label: 'Products' },
+  { href: '#about', label: 'About' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -25,22 +26,79 @@ function WhatsAppIcon() {
   )
 }
 
-export default function Navbar() {
+function MenuIcon({ open }) {
+  return (
+    <svg className="menu-icon" viewBox="0 0 24 24" aria-hidden="true">
+      {open ? (
+        <>
+          <path d="M6 6 18 18" />
+          <path d="M18 6 6 18" />
+        </>
+      ) : (
+        <>
+          <path d="M4 7h16" />
+          <path d="M4 12h16" />
+          <path d="M4 17h16" />
+        </>
+      )}
+    </svg>
+  )
+}
+
+export default function Navbar({ showAllProducts, onToggleProducts }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
     <header className="site-header">
       <a href="#home" className="brand-mark">
-        Niharika
+        <span className="brand-logo">
+          <img src="brand/niharika-badri-logo.jpeg" alt="" />
+        </span>
+        <span  className="brand-name">Niharika Labels</span>
       </a>
 
-      <nav className="site-nav" aria-label="Primary navigation">
+      <nav
+        id="site-menu"
+        className={menuOpen ? 'site-nav site-nav-open' : 'site-nav'}
+        aria-label="Primary navigation"
+      >
+        <button
+          type="button"
+          className="nav-menu-product"
+          onClick={() => {
+            onToggleProducts(!showAllProducts)
+            setMenuOpen(false)
+          }}
+        >
+          {showAllProducts ? 'Home' : 'All Products'}
+        </button>
         {links.map((link) => (
-          <a key={link.href} href={link.href}>
+          <a
+            key={link.href}
+            href={link.href}
+            onClick={() => {
+              if (link.href === '#explore') {
+                onToggleProducts(true)
+              }
+              setMenuOpen(false)
+            }}
+          >
             {link.label}
           </a>
         ))}
       </nav>
 
       <div className="nav-socials">
+        <button
+          type="button"
+          className="menu-toggle"
+          onClick={() => setMenuOpen((current) => !current)}
+          aria-expanded={menuOpen}
+          aria-controls="site-menu"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        >
+          <MenuIcon open={menuOpen} />
+        </button>
         <a
           href={getWhatsAppUrl(getCustomOrderMessage())}
           className="instagram-link nav-instagram"

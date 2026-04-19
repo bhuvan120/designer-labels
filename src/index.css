@@ -78,68 +78,100 @@ textarea:focus-visible {
   top: 0;
   z-index: 20;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 14px 0;
-  background: rgba(247, 247, 243, 0.94);
-  backdrop-filter: blur(14px);
+  padding: 12px 0;
+  background: rgba(247, 247, 243, 0.96);
+  backdrop-filter: blur(16px);
 }
 
 .brand-mark {
-  position: relative;
-  font-family: 'Bodoni Moda', 'DM Serif Display', Georgia, serif;
-  font-size: clamp(1.75rem, 4vw, 2.45rem);
-  font-weight: 700;
-  line-height: 0.88;
-  letter-spacing: 0.02em;
-  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
 }
 
-.brand-mark::after {
-  content: '';
-  position: absolute;
-  left: 0.12em;
-  right: 0.12em;
-  bottom: -0.14em;
-  height: 2px;
-  background: linear-gradient(90deg, var(--teal), var(--coral));
+.brand-logo {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #efeee5;
+}
+
+.brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+
+.brand-name {
+  font-family: 'Bodoni Moda', 'DM Serif Display', Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  background: linear-gradient(90deg, #4b1022 0%, #087f7a 58%, #d94f45 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
 }
 
 .site-nav {
-  display: flex;
-  justify-content: center;
-  gap: 18px;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: none;
+  min-width: 220px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
   color: var(--muted);
   font-size: 0.8rem;
   font-weight: 800;
   text-transform: uppercase;
 }
 
+.site-nav-open {
+  display: grid;
+}
+
 .site-nav a,
-.nav-action {
-  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-.site-nav a:hover {
-  color: var(--teal);
-}
-
-.nav-action {
-  border: 1px solid var(--ink);
-  border-radius: var(--radius);
-  padding: 10px 16px;
-  font-size: 0.85rem;
-  font-weight: 800;
+.nav-menu-product {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  padding: 14px 16px;
+  text-align: left;
   text-transform: uppercase;
+  transition: color 180ms ease, background 180ms ease;
 }
 
-.nav-action:hover {
-  border-color: var(--teal);
-  background: var(--teal);
-  color: #fff;
+.site-nav a {
+  border-bottom: 1px solid var(--line);
+  padding: 14px 16px;
+}
+
+.site-nav a:last-child {
+  border-bottom: 0;
+}
+
+.site-nav a:hover,
+.nav-menu-product:hover {
+  background: rgba(8, 127, 122, 0.08);
+  color: var(--teal);
 }
 
 .instagram-link {
@@ -176,7 +208,35 @@ textarea:focus-visible {
 .nav-socials {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  align-items: center;
+  gap: 7px;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.menu-toggle:hover {
+  background: rgba(8, 127, 122, 0.08);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+.menu-icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 2;
 }
 
 .hero-section {
@@ -371,6 +431,12 @@ h2 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 18px;
   margin-top: 38px;
+}
+
+.showcase-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 34px;
 }
 
 .design-card {
@@ -803,16 +869,16 @@ h2 {
 }
 
 @media (max-width: 920px) {
-  .site-header {
-    grid-template-columns: 1fr auto;
-  }
-
-  .site-nav {
-    display: none;
-  }
-
   .nav-instagram span {
     display: none;
+  }
+
+  .nav-socials {
+    gap: 6px;
+  }
+
+  .menu-toggle {
+    padding-inline: 10px;
   }
 
   .split-header,

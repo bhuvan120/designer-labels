@@ -14,6 +14,7 @@ import designs from './data/designs.js'
 function App() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [activeDesign, setActiveDesign] = useState(null)
+  const [showAllProducts, setShowAllProducts] = useState(false)
 
   const categories = useMemo(
     () => ['All', ...Array.from(new Set(designs.map((item) => item.category)))],
@@ -25,20 +26,25 @@ function App() {
       ? designs
       : designs.filter((item) => item.category === activeCategory)
 
+  const visibleDesigns = showAllProducts ? filteredDesigns : filteredDesigns.slice(0, 4)
+
   return (
     <div className="app-shell">
-      <Navbar />
+      <Navbar showAllProducts={showAllProducts} onToggleProducts={setShowAllProducts} />
       <main>
         <Hero />
         <CollectionStrip />
         <Showcase
-          designs={filteredDesigns}
+          designs={visibleDesigns}
           categories={categories}
           activeCategory={activeCategory}
           onSelectCategory={setActiveCategory}
           onSelectDesign={setActiveDesign}
+          showAllProducts={showAllProducts}
+          totalCount={filteredDesigns.length}
+          onShowAllProducts={() => setShowAllProducts(true)}
         />
-        <FeaturedProduct design={designs[0]} onSelectDesign={setActiveDesign} />
+        {!showAllProducts && <FeaturedProduct design={designs[0]} onSelectDesign={setActiveDesign} />}
         <AboutSection />
         <JoinSection />
         <ContactSection />
