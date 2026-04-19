@@ -5,6 +5,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Womenswear',
     image: '/designs/aqua-blue-womens-model.jpeg',
+    price: 'Price on request',
+    shipNote: 'Made to order',
     shortDescription:
       'Aqua halter blouse with a blue striped skirt, finished with shimmer detailing.',
     fullDescription:
@@ -16,6 +18,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Design Details',
     image: '/designs/aqua-blue-womens-set.jpeg',
+    price: 'Custom quote',
+    shipNote: 'Design reference',
     shortDescription:
       'Technical layout showing fabric choices, beadwork placement, and skirt construction.',
     fullDescription:
@@ -27,6 +31,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Womenswear',
     image: '/designs/aqua-dress-flat-details.jpeg',
+    price: 'Price on request',
+    shipNote: 'Custom order',
     shortDescription:
       'Long aqua dress with blue wave panels, silk organza accents, and beaded work.',
     fullDescription:
@@ -38,6 +44,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Womenswear',
     image: '/designs/purple-aqua-dress-flat.jpeg',
+    price: 'Price on request',
+    shipNote: 'Custom order',
     shortDescription:
       'Purple, aqua, and magenta dress concept with silk organza panels and beadwork.',
     fullDescription:
@@ -49,6 +57,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Menswear',
     image: '/designs/green-blue-mens-look-front.jpeg',
+    price: 'Price on request',
+    shipNote: 'Made to order',
     shortDescription:
       'Green and blue menswear look with curved contrast panels and shimmer side details.',
     fullDescription:
@@ -60,6 +70,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Menswear',
     image: '/designs/green-blue-mens-look-side.jpeg',
+    price: 'Price on request',
+    shipNote: 'Made to order',
     shortDescription:
       'Alternate view of the curved panel menswear look with royal blue trousers.',
     fullDescription:
@@ -71,6 +83,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Design Details',
     image: '/designs/mens-look-flat-details.jpeg',
+    price: 'Custom quote',
+    shipNote: 'Design reference',
     shortDescription:
       'Flat-lay design sheet with fabric notes for the green and blue menswear outfit.',
     fullDescription:
@@ -82,6 +96,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Menswear',
     image: '/designs/teal-line-mens-model.jpeg',
+    price: 'Price on request',
+    shipNote: 'Made to order',
     shortDescription:
       'Teal menswear coord with white curved lines and blue beaded trouser accents.',
     fullDescription:
@@ -93,6 +109,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Design Details',
     image: '/designs/teal-line-mens-flat.jpeg',
+    price: 'Custom quote',
+    shipNote: 'Design reference',
     shortDescription:
       'Technical sheet for the teal menswear coord with material and detail callouts.',
     fullDescription:
@@ -104,6 +122,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Menswear',
     image: '/designs/aqua-purple-coord-model.jpeg',
+    price: 'Price on request',
+    shipNote: 'Made to order',
     shortDescription:
       'Aqua short-sleeve shirt with purple and blue cargo-style trousers.',
     fullDescription:
@@ -115,6 +135,8 @@ const designs = [
     designer: 'Niharika',
     category: 'Design Details',
     image: '/designs/aqua-purple-coord-flat.jpeg',
+    price: 'Custom quote',
+    shipNote: 'Design reference',
     shortDescription:
       'Technical presentation of the aqua shirt and purple cargo trouser concept.',
     fullDescription:

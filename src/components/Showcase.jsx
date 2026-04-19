@@ -6,11 +6,11 @@ export default function Showcase({ designs, activeCategory, categories, onSelect
     <section id="explore" className="section showcase-section">
       <div className="section-header split-header">
         <div>
-          <p className="eyebrow">Niharika showcase</p>
-          <h2>Featured products and design pieces by Niharika.</h2>
+          <p className="eyebrow">New arrivals</p>
+          <h2>Shop Niharika's label pieces.</h2>
           <p>
-            Explore Niharika's finished pieces, label products, and design ideas. Every piece can
-            begin a purchase inquiry, custom order, or design conversation.
+            Browse each product, open details, or place an order on WhatsApp with the design name
+            already included.
           </p>
         </div>
         <CategoryFilter

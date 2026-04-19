@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
 
 const initialInputs = { name: '', email: '', project: '', sample: null }
 
@@ -52,6 +53,14 @@ export default function JoinSection() {
           <span>Custom outfit requests</span>
           <span>Fashion design work</span>
         </div>
+        <a
+          className="button button-primary intro-whatsapp"
+          href={getWhatsAppUrl(getCustomOrderMessage())}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Place Order on WhatsApp
+        </a>
       </div>
 
       <form onSubmit={handleSubmit} className="form-panel" noValidate>

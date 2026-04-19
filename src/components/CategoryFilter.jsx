@@ -1,12 +1,12 @@
 export default function CategoryFilter({ categories, activeCategory, onSelectCategory }) {
   return (
-    <div className="category-filter" aria-label="Filter designs by category">
+    <div className="category-toggle" aria-label="Filter designs by category">
       {categories.map((category) => (
         <button
           key={category}
           type="button"
           onClick={() => onSelectCategory(category)}
-          className={activeCategory === category ? 'chip chip-active' : 'chip'}
+          className={activeCategory === category ? 'toggle-option toggle-option-active' : 'toggle-option'}
         >
           {category}
         </button>

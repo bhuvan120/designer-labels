@@ -1,7 +1,11 @@
+import { getProductOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
+
 export default function DesignerModal({ design, onClose }) {
   if (!design) {
     return null
   }
+
+  const orderUrl = getWhatsAppUrl(getProductOrderMessage(design))
 
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
@@ -15,6 +19,7 @@ export default function DesignerModal({ design, onClose }) {
         <div className="modal-content">
           <p className="eyebrow">{design.category}</p>
           <h2 id="modal-title">{design.title}</h2>
+          <p className="modal-price">{design.price} · {design.shipNote}</p>
           <p>{design.fullDescription}</p>
 
           <div className="designer-note">
@@ -26,9 +31,9 @@ export default function DesignerModal({ design, onClose }) {
             </p>
           </div>
 
-          <button type="button" className="button button-primary">
-            Contact Niharika
-          </button>
+          <a className="button button-primary" href={orderUrl} target="_blank" rel="noreferrer">
+            Order on WhatsApp
+          </a>
         </div>
       </article>
     </div>

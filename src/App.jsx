@@ -7,6 +7,8 @@ import AboutSection from './components/AboutSection.jsx'
 import JoinSection from './components/JoinSection.jsx'
 import ContactSection from './components/ContactSection.jsx'
 import Footer from './components/Footer.jsx'
+import CollectionStrip from './components/CollectionStrip.jsx'
+import FeaturedProduct from './components/FeaturedProduct.jsx'
 import designs from './data/designs.js'
 
 function App() {
@@ -23,15 +25,12 @@ function App() {
       ? designs
       : designs.filter((item) => item.category === activeCategory)
 
-  const handleExploreClick = () => {
-    document.getElementById('explore')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   return (
     <div className="app-shell">
       <Navbar />
       <main>
-        <Hero onExploreClick={handleExploreClick} />
+        <Hero />
+        <CollectionStrip />
         <Showcase
           designs={filteredDesigns}
           categories={categories}
@@ -39,6 +38,7 @@ function App() {
           onSelectCategory={setActiveCategory}
           onSelectDesign={setActiveDesign}
         />
+        <FeaturedProduct design={designs[0]} onSelectDesign={setActiveDesign} />
         <AboutSection />
         <JoinSection />
         <ContactSection />

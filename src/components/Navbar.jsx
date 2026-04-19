@@ -1,7 +1,8 @@
+import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
+
 const links = [
-  { href: '#explore', label: 'Explore' },
-  { href: '#about', label: 'About' },
-  { href: '#join', label: 'Design Request' },
+  { href: '#explore', label: 'Shop' },
+  { href: '#join', label: 'Order' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -15,11 +16,20 @@ function InstagramIcon() {
   )
 }
 
+function WhatsAppIcon() {
+  return (
+    <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4.5 19.5 5.7 15.4a7.2 7.2 0 1 1 2.9 2.9l-4.1 1.2Z" />
+      <path d="M9.2 8.8c.2-.5.4-.5.7-.5h.5c.2 0 .4 0 .5.4l.6 1.4c.1.2.1.4-.1.6l-.4.5c-.1.1-.2.3 0 .5.4.8 1.1 1.5 2 2 .2.1.4.1.5-.1l.6-.7c.1-.2.3-.2.6-.1l1.4.7c.2.1.4.3.4.5 0 .5-.2 1-.6 1.3-.4.4-1.2.5-2.1.2-1.8-.5-3.8-2.1-4.8-3.8-.5-.9-.8-1.7-.7-2.3.1-.2.2-.4.4-.6Z" />
+    </svg>
+  )
+}
+
 export default function Navbar() {
   return (
     <header className="site-header">
       <a href="#home" className="brand-mark">
-        Niharika Labels
+        Niharika
       </a>
 
       <nav className="site-nav" aria-label="Primary navigation">
@@ -30,16 +40,28 @@ export default function Navbar() {
         ))}
       </nav>
 
-      <a
-        href="https://www.instagram.com/label_by_niharikabadri/"
-        className="instagram-link nav-instagram"
-        target="_blank"
-        rel="noreferrer"
-        aria-label="Niharika on Instagram"
-      >
-        <InstagramIcon />
-        <span>label_by_niharikabadri</span>
-      </a>
+      <div className="nav-socials">
+        <a
+          href={getWhatsAppUrl(getCustomOrderMessage())}
+          className="instagram-link nav-instagram"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Order on WhatsApp"
+        >
+          <WhatsAppIcon />
+          <span>WhatsApp</span>
+        </a>
+        <a
+          href="https://www.instagram.com/label_by_niharikabadri/"
+          className="instagram-link nav-instagram"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Niharika on Instagram"
+        >
+          <InstagramIcon />
+          <span>Instagram</span>
+        </a>
+      </div>
     </header>
   )
 }
