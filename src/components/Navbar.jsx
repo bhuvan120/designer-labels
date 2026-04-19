@@ -52,7 +52,7 @@ export default function Navbar({ showAllProducts, onToggleProducts }) {
     <header className="site-header">
       <a href="#home" className="brand-mark">
         <span className="brand-logo">
-          <img src="brand/niharika-badri-logo.jpeg" alt="" />
+          <img src="brand/logo.jpeg" alt="" />
         </span>
         <span  className="brand-name">Niharika Labels</span>
       </a>
