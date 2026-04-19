@@ -14,6 +14,9 @@ export default function DesignCard({ design, onSelect }) {
           {design.title}
         </button>
         <p className="card-price">{design.price}</p>
+        <a className="product-order-link" href={orderUrl} target="_blank" rel="noreferrer">
+          Order on WhatsApp
+        </a>
         <button type="button" className="product-image-link" onClick={() => onSelect(design)}>
           View Details
         </button>

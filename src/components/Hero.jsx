@@ -11,7 +11,7 @@ export default function Hero() {
       <div className={loaded ? 'hero-loading-shell hero-loading-shell-hidden' : 'hero-loading-shell'} />
       <img
         src={HERO_IMAGE}
-        alt="Editorial fashion landscape"
+        alt="Niharika runway look"
         className={loaded ? 'hero-image hero-image-wide hero-image-loaded' : 'hero-image hero-image-wide'}
         loading="eager"
         onLoad={() => setLoaded(true)}

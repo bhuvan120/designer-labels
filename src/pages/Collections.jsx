@@ -41,6 +41,9 @@ export default function Collections() {
           showAllProducts={true}
           totalCount={filteredDesigns.length}
           onShowAllProducts={() => {}}
+          eyebrow="Collection"
+          title="Shop the collection."
+          description="Browse every available piece, choose a category, and open any item to order through WhatsApp."
         />
       </main>
       <Footer />

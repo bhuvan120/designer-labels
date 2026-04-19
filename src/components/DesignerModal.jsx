@@ -9,7 +9,13 @@ export default function DesignerModal({ design, onClose }) {
 
   return (
     <div className="modal-backdrop" role="presentation" onMouseDown={onClose}>
-      <article className="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title" onMouseDown={(event) => event.stopPropagation()}>
+      <article
+        className="modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
         <button type="button" className="modal-close" onClick={onClose}>
           Close
         </button>
@@ -19,8 +25,23 @@ export default function DesignerModal({ design, onClose }) {
         <div className="modal-content">
           <p className="eyebrow">{design.category}</p>
           <h2 id="modal-title">{design.title}</h2>
-          <p className="modal-price">{design.price} · {design.shipNote}</p>
+          <p className="modal-price">
+            {design.price} | {design.shipNote}
+          </p>
           <p>{design.fullDescription}</p>
+
+          {design.gallery?.length > 1 && (
+            <div className="modal-gallery">
+              {design.gallery.map((image, index) => (
+                <img
+                  key={`${design.id}-gallery-${index + 1}`}
+                  src={image}
+                  alt={`${design.title} ${index + 1}`}
+                  className="modal-gallery-image"
+                />
+              ))}
+            </div>
+          )}
 
           <div className="designer-note">
             <span>Designer</span>
