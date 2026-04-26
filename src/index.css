@@ -68,7 +68,7 @@ textarea:focus-visible {
 }
 
 .app-shell {
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .app-shell-inner {
@@ -171,8 +171,8 @@ textarea:focus-visible {
 
 .brand-logo {
   display: block;
-  width: clamp(144px, 18vw, 250px);
-  height: clamp(56px, 7vw, 92px);
+  width: clamp(104px, 10.8vw, 186px);
+  height: clamp(30px, 4vw, 57px);
   object-fit: contain;
 }
 
@@ -1329,8 +1329,8 @@ h2 {
   }
 
   .brand-logo {
-    width: clamp(108px, 24vw, 150px);
-    height: 54px;
+    width: clamp(94px, 21vw, 128px);
+    height: 46px;
   }
 
   .header-search {
@@ -1406,8 +1406,8 @@ h2 {
   }
 
   .brand-logo {
-    width: 112px;
-    height: 50px;
+    width: 98px;
+    height: 44px;
   }
 
   .header-search-open {
