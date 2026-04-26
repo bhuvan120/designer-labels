@@ -4,9 +4,18 @@ import DesignerModal from '../components/DesignerModal.jsx'
 import Footer from '../components/Footer.jsx'
 import designs from '../data/designs.js'
 
+const normalizeSearchText = (value) =>
+  value
+    .toLowerCase()
+    .replace(/\bwomens?\s+wear\b/g, 'womenswear')
+    .replace(/\bmens?\s+wear\b/g, 'menswear')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+
 export default function Collections() {
   const initialCategory = new URLSearchParams(window.location.search).get('category') || 'All'
-  const searchQuery = (new URLSearchParams(window.location.search).get('q') || '').trim().toLowerCase()
+  const searchQuery = (new URLSearchParams(window.location.search).get('q') || '').trim()
+  const normalizedSearchQuery = normalizeSearchText(searchQuery)
   const [activeCategory, setActiveCategory] = useState(initialCategory)
   const [activeDesign, setActiveDesign] = useState(null)
 
@@ -20,13 +29,13 @@ export default function Collections() {
       ? designs
       : designs.filter((item) => item.category === activeCategory)
 
-  const filteredDesigns = searchQuery
-    ? categoryDesigns.filter((item) =>
-        [item.title, item.category, item.shortDescription, item.fullDescription]
-          .join(' ')
-          .toLowerCase()
-          .includes(searchQuery),
-      )
+  const filteredDesigns = normalizedSearchQuery
+    ? categoryDesigns.filter((item) => {
+        const searchableText = normalizeSearchText(
+          [item.title, item.category, item.shortDescription, item.fullDescription].join(' '),
+        )
+        return ` ${searchableText} `.includes(` ${normalizedSearchQuery} `)
+      })
     : categoryDesigns
 
   return (

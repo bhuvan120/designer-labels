@@ -164,35 +164,16 @@ textarea:focus-visible {
 
 .brand-lockup {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   justify-self: center;
-  gap: 4px;
-  line-height: 1;
+  line-height: 0;
 }
 
-.brand-lockup-top {
-  font-family: Inter, system-ui, sans-serif;
-  font-size: clamp(1.12rem, 2.2vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: transparent;
-  background: linear-gradient(90deg, #1f58c8 0%, #7d4de0 55%, #c37ce6 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-.brand-lockup-bottom {
-  margin-top: 2px;
-  font-size: clamp(0.86rem, 1.5vw, 1.18rem);
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  color: transparent;
-  background: linear-gradient(90deg, #ff6d6d 0%, #8a60ff 50%, #20bf7a 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  padding-left: 0.34em;
-  white-space: nowrap;
+.brand-logo {
+  display: block;
+  width: clamp(144px, 18vw, 250px);
+  height: clamp(56px, 7vw, 92px);
+  object-fit: contain;
 }
 
 .icon-button,
@@ -350,16 +331,8 @@ textarea:focus-visible {
   color: #fff;
 }
 
-.site-header-shell-transparent .brand-lockup-top {
-  background: linear-gradient(90deg, #ffffff 0%, #f4d8ff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-}
-
-.site-header-shell-transparent .brand-lockup-bottom {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95) 0%, rgba(221, 245, 255, 0.95) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
+.site-header-shell-transparent .brand-logo {
+  filter: drop-shadow(0 1px 8px rgba(0, 0, 0, 0.18));
 }
 
 .site-header-shell-transparent .header-search input::placeholder {
@@ -1315,12 +1288,12 @@ h2 {
   margin: 0;
 }
 
-.footer-title {
-  color: var(--ink);
-  font-size: 1rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.footer-logo {
+  display: block;
+  width: min(240px, 68vw);
+  height: 108px;
+  object-fit: contain;
+  object-position: left center;
 }
 
 .footer-copy {
@@ -1355,13 +1328,9 @@ h2 {
     width: min(100%, calc(100% - 36px));
   }
 
-  .brand-lockup-top {
-    font-size: clamp(0.92rem, 4vw, 1.2rem);
-  }
-
-  .brand-lockup-bottom {
-    font-size: 0.66rem;
-    letter-spacing: 0.24em;
+  .brand-logo {
+    width: clamp(108px, 24vw, 150px);
+    height: 54px;
   }
 
   .header-search {
@@ -1436,13 +1405,9 @@ h2 {
     padding: 12px 0;
   }
 
-  .brand-lockup-top {
-    font-size: 0.82rem;
-  }
-
-  .brand-lockup-bottom {
-    font-size: 0.56rem;
-    letter-spacing: 0.18em;
+  .brand-logo {
+    width: 112px;
+    height: 50px;
   }
 
   .header-search-open {

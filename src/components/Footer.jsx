@@ -1,5 +1,7 @@
 import { getCustomOrderMessage, getWhatsAppUrl } from '../utils/whatsapp.js'
 
+const BRAND_LOGO = '/brand/logo-header.png'
+
 function InstagramIcon() {
   return (
     <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -23,7 +25,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <p className="footer-title">LABEL NIHARIKA</p>
+        <img src={BRAND_LOGO} alt="Label Niharika" className="footer-logo" />
         <p className="footer-copy">Original garments, product concepts, and custom design work by Niharika.</p>
       </div>
 

@@ -10,6 +10,8 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ]
 
+const BRAND_LOGO = '/brand/logo-header.png'
+
 function SearchIcon() {
   return (
     <svg className="social-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -97,8 +99,7 @@ export default function Navbar({ currentPath }) {
           </button>
 
           <a href="/" className="brand-lockup" aria-label="Label Niharika home">
-            <span className="brand-lockup-top">LABEL</span>
-            <span className="brand-lockup-bottom">NIHARIKA</span>
+            <img src={BRAND_LOGO} alt="Label Niharika" className="brand-logo" />
           </a>
 
           <div className="site-header-right">
